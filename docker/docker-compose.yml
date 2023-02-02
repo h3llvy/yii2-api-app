@@ -1,0 +1,44 @@
+version: '3.9'
+
+networks:
+  network:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./../:/var/www/html
+      - ./default.conf:/etc/nginx/templates/default.conf.template
+    depends_on:
+      - php
+    environment:
+      API_SERVER_NAME: $API_SERVER_NAME
+    networks:
+      - network
+  php:
+    build:
+      context: ./
+      dockerfile: dockerfile
+    container_name: glonass-nvrsk-back-php
+    environment:
+      PHP_IDE_CONFIG: "serverName=localhost"
+    volumes:
+      - ./../:/var/www/html
+      - ./docker-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    networks:
+      - network
+  mysql:
+    image: mysql:5.7
+    container_name: glonass-nvrsk-back-mysql
+    command: mysqld --sql_mode="" --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_DATABASE: 'database'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD_ROOT
+    ports:
+      - '3306:3306'
+    networks:
+      - network

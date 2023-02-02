@@ -1,0 +1,39 @@
+{
+  "require": {
+    "php": "^7.2.0",
+    "yiisoft/yii2": "~2.0.14",
+    "yii2mod/yii2-swagger": "dev-master",
+    "vlucas/phpdotenv": "5.4.x-dev",
+    "ext-mbstring": "*",
+    "yiisoft/yii2-swiftmailer": "2.1.x-dev",
+    "iio/libmergepdf": "dev-master",
+    "ext-intl": "*",
+    "omnilight/yii2-scheduling": "*",
+    "luoxiaojun1992/yii2-tinker": "*",
+    "guzzlehttp/guzzle": "7.5.x-dev",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "~2.1.0",
+    "yiisoft/yii2-gii": "~2.2.0",
+    "yiisoft/yii2-faker": "2.0.x-dev",
+    "symfony/browser-kit": ">=2.7 <=4.2.4"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "app\\": "app",
+      "api\\": "api"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true
+    }
+  }
+}
